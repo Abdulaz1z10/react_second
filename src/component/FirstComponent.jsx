@@ -1,41 +1,44 @@
-import React, { Component } from "react";
+import React from 'react'
+import { useState } from 'react';
+
+const Header = () => {
+const [selectedOption, setSelectedOption] = useState(null);
 
 
-export default class FirstComponent extends Component{
+const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+};
 
-    increase=()=>{
-        let {count} = this.props
-        console.log(count)
-        count++
-    }
+return (
+    <div className='d-flex justify-content-center gap-3 mt-5 align-items-center'>
+    <label className='d-flex align-items-center gap-1'>
+        <input
 
-render(){
-    const {users, count} = this.props
-    return <div className="container">
-        <h1>Count: {count}</h1>
-        <button onClick={this.increase}>+</button>
-        <button onClick={this.decrease}>-</button>
-        {/* <table className="table table-bordered table-striped my-5">
-            <thead>
-                <tr>
-                <th>T/r</th>
-                <th>Name</th>
-                <th>Salary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    users.map((item,index)=>{
-                    return <tr>
-                        <td>{index + 1}</td>
-                        <td>{item.name}</td>
-                        <td>{item.salary}</td>
-                    </tr>
-                    })
-                }
-            </tbody>
-        </table> */}
+        type="radio"
+        value="yes"
+        checked={selectedOption === 'yes'}
+        onChange={handleOptionChange}
+        />
+    <h1> Yes</h1>
+    </label>
+    <label className='d-flex align-items-center gap-1'>
+        <input
+        type="radio"
+        value="no"
+        checked={selectedOption === 'no'}
+        onChange={handleOptionChange}
+        />
+    <h1> No</h1>
+    </label>
+    {selectedOption && (
+        <p className='w-auto'>
+        Siz {selectedOption === 'yes' ? 'ushbu amalga rozisiz' : 'Siz bunga qarshisiz'}
+        </p>
+    )}
     </div>
-    
-    }
-}
+);
+
+};
+
+
+export default Header;
